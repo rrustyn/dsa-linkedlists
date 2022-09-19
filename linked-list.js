@@ -23,12 +23,27 @@ class LinkedList {
   /** push(val): add new value to end of list. */
 
   push(val) {
-
+    //update head if first in
+    //update tail
+    //move old end to point at val
+    let newNode = new Node(val);
+    if (this.head === null) this.head = newNode;
+    if (this.tail !== null) this.tail.next = newNode;
+    this.tail = newNode;
+    this.length++;
   }
 
   /** unshift(val): add new value to start of list. */
 
   unshift(val) {
+    //set the added node next to be old head
+    //replace the head
+    //length plus 1
+    let newNode = new Node(val);
+    if (this.tail === null) this.tail = newNode;
+    if (this.head !== null) newNode.next = this.head;
+    this.head = newNode;
+    this.length++;
 
   }
 
