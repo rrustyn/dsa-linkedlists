@@ -216,7 +216,53 @@ class LinkedList {
   /** average(): return an average of all values in the list */
 
   average() {
+    if (this.length === 0) return 0;
 
+    let current = this.head;
+    let count = 0;
+    let sum = 0;
+
+    while (current !== null) {
+      sum += current.val;
+      count++;
+      current = current.next;
+    }
+
+    return sum / count;
+  }
+
+  /** Reverse in place */
+
+  reverseInPlace() {
+    // a --> b --> c -- d
+    //a.next = b
+    //b.next = c
+    //if we're at b: prev.next = b, current.next = c, following.next = d
+    //rev in place for b: set b.next = prev
+
+    let ogHead = this.head;
+    let ogTail = this.tail;
+
+    let current = this.head;
+    let prev;
+    let following;
+
+    while (current !== null) {
+      if (current === this.head) {
+        prev = current;
+        following = current.next;
+        current.next = null;
+        current = following;
+      } else {
+        following = current.next;
+        current.next = prev;
+        prev = current;
+        current = following;
+      }
+    }
+    
+    this.head = ogTail;
+    this.tail = ogHead;
   }
 }
 
